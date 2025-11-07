@@ -1,12 +1,20 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+interface HelloResponse {
+  message: string;
+  timestamp: number;
+}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+@Controller('api')
+export class AppController {
+
+  @Get('hello')
+  getHello(): HelloResponse {
+    return {
+      message: 'Aplicação com NestJs!',
+      timestamp: Date.now(),
+    
+    };
   }
 }
